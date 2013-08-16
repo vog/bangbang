@@ -18,6 +18,8 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 '''
 
+import sys
+
 from expected import expected_a
 
 s = set()
@@ -43,9 +45,12 @@ next_state_c = {
 def next_noreplace(cur):
     result = ''
     state = 'out'
-    for c in cur:
+    for i, c in enumerate(cur):
+        if i % 1000000 == 0:
+            sys.stderr.write('%.2f%%    \r' % (i * 100.0 / len(cur),))
         state, new_c = next_state_c[(state, c)]
         result = result + new_c
+    sys.stderr.write('           \r')
     return result
 
 def next(cur, repl):
