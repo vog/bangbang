@@ -13,7 +13,6 @@ More information:
 
 Current results:
 
-    Number of characters: [6, 11, 15, 28, 54, 210, 2082, 203842, 2074683522]
     Number of bangbangs:  [1, 2, 2, 3, 5, 17, 161, 15681, 159591041]
 
 This script uses a different internal representation

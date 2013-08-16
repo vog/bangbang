@@ -40,57 +40,43 @@ next_state_c = {
     ('sgl', 's'): ('out', 's'),
 }
 
-def next(cur, repl):
+def next_noreplace(cur):
+    result = ''
     state = 'out'
-    result = []
     for c in cur:
         state, new_c = next_state_c[(state, c)]
-        if new_c == 'r':
-            result.append(repl)
-        else:
-            result.append(new_c)
-    return ''.join(result)
+        result = result + new_c
+    return result
 
-translation = [
-    ('!!', 'b'),
-    (': ', 'c'),
-    ('"', 'd'),
-    ("'", 's'),
-    (' ', '_'),
-]
+def next(cur, repl):
+    return next_noreplace(cur).replace('r', repl)
+
+translate_char = {
+    'b': '!!',
+    'c': ': ',
+    'd': '"',
+    's': "'",
+    '_': ' ',
+}
 
 def translate(s):
-    for src, dest in translation:
-        s = s.replace(src, dest)
-    return s
+    return ''.join(translate_char[c] for c in s)
 
-def untranslate(s):
-    for src, dest in reversed(translation):
-        s = s.replace(dest, src)
-    return s
+a0 = 'csbs'
+a1 = 'cdbd_sbs'
+a2 = next(a1, a0)
+a3 = next(a2, a2) # Note: This is not a bug, but actual shell behaviour!
+a4 = next(a3, a3)
+a5 = next(a4, a4)
+a6 = next(a5, a5)
+a7 = next(a6, a6)
+a8 = next(a7, a7)
 
-def next_translate(cur, repl):
-    return untranslate(next(translate(cur), translate(repl)))
-
-a0 = """: '!!'"""
-a1 = """: "!!" '!!'"""
-a2 = next_translate(a1, a0)
-a3 = next_translate(a2, a2) # Note: This is not a bug, but actual shell behaviour!
-a4 = next_translate(a3, a3)
-a5 = next_translate(a4, a4)
-a6 = next_translate(a5, a5)
-a7 = next_translate(a6, a6)
-
-a = [a0, a1, a2, a3, a4, a5, a6, a7]
+a = [a0, a1, a2, a3, a4, a5, a6, a7, a8]
 
 print
-print 'Test result: ', [(i, a[i] == expected_a[i]) for i in xrange(len(expected_a))]
+print 'Test result: ', [(i, translate(a[i]) == expected_a[i]) for i in xrange(len(expected_a))]
 print
 
-# Warning: Do not enable this unless you have at least 4 GiB of RAM!
-#a8 = next_translate(a7, a7)
-#a.append(a8)
-
-print 'Number of characters:', [len(ai) for ai in a]
-print 'Number of bangbangs: ', [ai.count('!!') for ai in a]
+print 'Number of bangbangs: ', [ai.count('b') for ai in a]
 print
