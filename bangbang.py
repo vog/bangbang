@@ -56,9 +56,12 @@ def next_noreplace(cur):
 def next(cur, repl):
     return next_noreplace(cur).replace('r', repl)
 
-def next_len(cur, repl):
-    r = next_noreplace(cur).count('r')
-    return len(cur) - r + (r * len(repl))
+def next_count_b(cur, repl):
+    cur_b = cur.count('b')
+    next_string = next_noreplace(cur)
+    next_b = next_string.count('b')
+    next_r = next_string.count('r')
+    return next_b + (next_r * cur_b)
 
 translate_char = {
     'b': '!!',
@@ -84,10 +87,11 @@ a8 = next(a7, a7)
 a = [a0, a1, a2, a3, a4, a5, a6, a7, a8]
 
 assert [translate(ai) for ai in a[:len(expected_a)]] == expected_a
-assert all(next_len(a[i-1], a[i-1]) == len(a[i]) for i in xrange(3, len(a)))
+assert all(next_count_b(a[i-1], a[i-1]) == a[i].count('b') for i in xrange(3, len(a)))
 
-a9_len = next_len(a8, a8)
+a9_count_b = next_count_b(a8, a8)
 
+counts_b = [ai.count('b') for ai in a] + [a9_count_b]
 print
-print 'Number of bangbangs: ', [ai.count('b') for ai in a] + [a9_len]
+print 'Number of bangbangs: ', counts_b
 print
