@@ -13,7 +13,7 @@ More information:
 
 Current results:
 
-    Number of bangbangs:  [1, 2, 2, 3, 5, 17, 161, 15681, 159591041]
+    Number of bangbangs:  [1, 2, 2, 3, 5, 17, 161, 15681, 159591041, 168668479408755201]
 
 This script uses a different internal representation
 of singe quote, double quote, colon-space and bangbang
