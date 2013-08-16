@@ -74,9 +74,8 @@ a8 = next(a7, a7)
 
 a = [a0, a1, a2, a3, a4, a5, a6, a7, a8]
 
-print
-print 'Test result: ', [(i, translate(a[i]) == expected_a[i]) for i in xrange(len(expected_a))]
-print
+assert [translate(ai) for ai in a[:len(expected_a)]] == expected_a
 
+print
 print 'Number of bangbangs: ', [ai.count('b') for ai in a]
 print
