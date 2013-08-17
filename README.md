@@ -15,9 +15,10 @@ More efficient implementation:
 
 * [bangbang_counter.py](https://gist.github.com/robinhouston/6251775) by Robin Houston
 
-Proposed sequence to OEIS:
+Sequence in OEIS:
 
-* [A228162](https://oeis.org/draft/A228162)
+* [A228162](https://oeis.org/A228162)
+* [A228162 Draft](https://oeis.org/draft/A228162)
 
 
 Results
