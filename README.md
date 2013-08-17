@@ -17,7 +17,7 @@ Further analysis:
 
 Sequence in OEIS:
 
-* [A228162](https://oeis.org/A228162) ([Draft](https://oeis.org/draft/A228162))
+* [A228162](https://oeis.org/A228162)
 
 
 Results
